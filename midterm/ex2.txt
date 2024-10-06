@@ -1,0 +1,23 @@
+Input: an array A of numbers of length n
+Output: True if the array is sorted in the increasing order, and False otherwise
+
+EREW PRAM algorithm :
+
+1- Create an array B of length n
+2- For i = 0, ..., n-1 (not included) in parallel, set B[i] to be 1 if A[i]<=A[i+1] and 0 otherwise
+3- Compute m, the minimal value in B 
+4- Return true if m is 1, false otherwise
+
+Correctness : If at some point the array is not sorted, a 0 will appear in B and the minimum m will be 0, which will return false.
+Complexity : The first two steps have constant complexity using EREW. The third step has complexity O(log n) using EREW. So the total cost is O(log n) with EREW.
+
+
+CRCW PRAM algorithm : 
+
+1- Create a variable res and set it to True
+2- For i= 0 , ..., n-1 (not included) in parallel, if A[i]>A[i+1], set res to False
+3- Return res
+
+For faster computation, we can even check before each comparison of pairs if res is false, if so, return false directly.
+Correctness : Clearly, if there is a pair of elements that is not sorted, the global bool will be set to false. 
+Complexity : Each step is O(1) with a CRCW approach. 
